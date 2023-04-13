@@ -12,6 +12,7 @@ struct ContentView: View {
     @State private var checkAmount = 0.0
     @State private var numberOfPeople = 2
     @State private var tipPercentage = 20
+    private var currencyFormatter: FloatingPointFormatStyle<Double>.Currency = .currency(code:Locale.current.currency?.identifier ?? "USD")
     let tipPercentages = [10, 15, 20, 25, 0]
     var totalAmt: Double {
         let peopleCount = Double(numberOfPeople + 2)
@@ -56,12 +57,12 @@ struct ContentView: View {
                     Text("How much tip do you want to leave?")
                 }
                 Section {
-                    Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    Text(totalPerPerson, format: currencyFormatter)
                 } header: {
                     Text("Amount per person")
                 }
                 Section {
-                    Text(totalAmt, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    Text(totalAmt, format: currencyFormatter)
                 } header: {
                     Text("Total Amount for check to be split")
                 }
